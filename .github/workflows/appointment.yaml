@@ -1,6 +1,6 @@
 # CICD using GitHub actions
 
-name: CI/CD
+name: appointment CI/CD
 on:
   push:
     paths:

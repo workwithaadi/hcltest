@@ -1,6 +1,6 @@
 # CICD using GitHub actions
 
-name: CI/CD
+name: patient CI/CD
 on:
   push:
     paths:
