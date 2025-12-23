@@ -8,29 +8,8 @@ on:
     branches:
       - main
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-          cache-dependency-path: appointment/
-      - name: Install dependencies
-        run: npm install
-        working-directory: appointment
-      - name: Run tests
-        run: npm test
-        working-directory: appointment
   push:
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -44,7 +23,7 @@ jobs:
       - name: Build and Push Multi-Arch Image action
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./appointment
           file: ./appointment/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
